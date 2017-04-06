@@ -11,7 +11,8 @@
     [self.collectionView addGestureRecognizer:longPress];
 ```
 ```
- // 2.判断是否是确定了手势类型，如果是确定手势类型，就继续往下走，
+- (void)longPressGesture:(UILongPressGestureRecognizer *)gestureRecognizer {
+    // 2.判断是否是确定了手势类型，如果是确定手势类型，就继续往下走，
     //   这里之前使用了UIGestureRecognizerStateEnded 效果并不好，要松开手指之后才能触发方法
     if (gestureRecognizer.state != UIGestureRecognizerStateBegan) {
         return;
@@ -19,8 +20,9 @@
     // 3.拿到点击的位置，通过位置获取indexPath
     CGPoint p = [gestureRecognizer locationInView:self.collectionView];
     NSIndexPath *indexPath = [self.collectionView indexPathForItemAtPoint:p];
-   
+
     if (indexPath == nil){
+
     } else {
         // 4.这里是自己简单写的弹框。
         LongTouchView *touchView = [LongTouchView sharManager];
@@ -28,6 +30,7 @@
         touchView.nameLabel.text = self.dataSource[indexPath.row];
         [touchView show];
     }
+}
 
 ```
 
